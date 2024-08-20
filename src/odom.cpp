@@ -42,7 +42,7 @@ void initOdom(bool wait, double time){
     } 
 }
 
-void odomLoop(){
+void odomLoop(bool isFwdTracker){
     double currfwd;
     double currHorz;
     double currAngle;
@@ -52,5 +52,29 @@ void odomLoop(){
     double prevfwd;
     double prevHorz;
     double prevAngle;
-    
+    while(true){
+        //track current vals
+        if(isFwdTracker){
+            currfwd = getForwardTrackerInchesOnRot();
+        } else{
+            currfwd = getForwardTrackerInchesOnEncoders();
+        }
+        double currAngle = getHeading(true);
+
+        //create deltas
+        deltafwd = currfwd - prevfwd;
+        deltaAngle = currAngle - prevAngle;
+
+        //locals
+        odomPos.x += deltafwd * sin(deltaAngle);
+        odomPos.y += deltafwd * cos(deltaAngle);
+        odomPos.theta = getHeading(false);
+
+        //set prevs to currs
+        prevfwd = currfwd;
+        prevAngle = currAngle;
+
+        //delay
+        pros::delay(10);
+    }
 }
