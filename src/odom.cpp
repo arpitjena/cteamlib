@@ -37,6 +37,8 @@ void initOdom(bool wait, double time){
     right.tare_position();
     imu.reset();
     forwardRot.reset();
+    left.set_encoder_units(pros::E_MOTOR_ENCODER_ROTATIONS);
+    right.set_encoder_units(pros::E_MOTOR_ENCODER_ROTATIONS);
     if(wait){
         pros::delay(time);
     } 
