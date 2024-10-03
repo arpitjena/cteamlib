@@ -4,11 +4,12 @@
 class PID{
     public:
 
-    PID::PID(double kp, double ki, double kd);
+    PID(double kp, double ki, double kd);
     double computeError(double error);
     double compute(double current, double target);
     void reset();
     void setConstants(double kp, double ki, double kd);
+    bool isSettled();
     private:
         double kp;
         double ki; 

@@ -7,3 +7,4 @@ extern Pose getOdomPos();
 extern void initOdom();
 extern Pose odomPos;
 extern void odomLoop(bool isFwdTracker);
+extern double getForwardTrackerInchesOnEncoders();

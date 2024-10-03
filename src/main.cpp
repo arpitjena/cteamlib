@@ -1,6 +1,4 @@
 #include "main.h"
-#include "opcontrol.hpp"
-#include "devices.hpp"
 
 /**
  * A callback function for LLEMU's center button.
@@ -27,7 +25,11 @@ void on_center_button() {
 void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
-
+	pros::Task odomTask([=]{
+		//run task
+		odomLoop(false);
+		
+	});
 	pros::lcd::register_btn1_cb(on_center_button);
 }
 
@@ -75,11 +77,13 @@ void autonomous() {}
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
+PID swingPID = PID(1,1,1);
 void opcontrol() {
 	while(true){
-		double leftStickVal = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-    	double rightStickVal = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+		double leftStickVal = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) * 140/100;
+    	double rightStickVal = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X) * 120/100;
 
-		tank(leftStickVal, rightStickVal);
+		arcade(leftStickVal, rightStickVal);
+		
 	}
 }

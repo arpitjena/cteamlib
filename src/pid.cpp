@@ -14,6 +14,13 @@ double PID::compute(double current, double target){
     return output;
 }
 
+bool PID::isSettled(){
+    if(error < 1){
+        return true;
+    } else{
+        return false;
+    }
+}
 void PID::reset(){
     totalError = 0.0;
     prevError = 0.0;

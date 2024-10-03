@@ -73,6 +73,14 @@ void odomLoop(bool isFwdTracker){
         //set prevs to currs
         prevfwd = currfwd;
         prevAngle = currAngle;
+        
+        pros::lcd::print(1, "x: %f", odomPos.x);
+        pros::lcd::print(2, "y: %f", odomPos.y);
+        pros::lcd::print(3, "x: %f", odomPos.theta);
+
+        pros::lcd::print(4, "left base temps: %f", left.get_temperature());
+        pros::lcd::print(5, "right base temps: %f", right.get_temperature());
+        pros::lcd::print(6, "intake temp: %f", intake.get_temperature());      
 
         //delay
         pros::delay(10);

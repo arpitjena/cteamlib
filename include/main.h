@@ -35,7 +35,14 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
-
+#include "movements/move.hpp"
+#include "movements/moveToPoint.hpp"
+#include "movements/moveToPose.hpp"
+#include "movements/swing.hpp"
+#include "movements/turn.hpp"
+#include "pid.hpp"
+#include "odom.hpp"
+#include "opcontrol.hpp"
 /**
  * You should add more #includes here
  */
